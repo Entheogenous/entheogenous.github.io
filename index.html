@@ -189,9 +189,9 @@ body::before {
   gap: clamp(12px, 2vw, 24px);
 }
 
-/* Magazine-style varied spans for visual asymmetry */
-.gallery__item:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
-.gallery__item:nth-child(6n+4) { grid-column: span 2; }
+/* Magazine-style varied spans for visual asymmetry (photos and motions only) */
+.gallery__item[data-category="photos"]:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
+.gallery__item[data-category="motions"]:nth-child(6n+4) { grid-column: span 2; }
 
 /* Items — zero shadow, border containment only */
 .gallery__item {
@@ -209,13 +209,21 @@ body::before {
   aspect-ratio: 16 / 9;
 }
 
+.gallery__item[data-category="wallpapers"] {
+  aspect-ratio: 9 / 19.5;
+}
+
+.gallery__item[data-category="wallpapers"][data-ratio="square"] {
+  aspect-ratio: 1 / 1;
+}
+
 /* Large spanned items keep square */
-.gallery__item:nth-child(6n+1) {
+.gallery__item[data-category="photos"]:nth-child(6n+1) {
   aspect-ratio: 1 / 1;
 }
 
 /* Wide span items */
-.gallery__item:nth-child(6n+4) {
+.gallery__item[data-category="motions"]:nth-child(6n+4) {
   aspect-ratio: 2 / 1;
 }
 
@@ -372,7 +380,15 @@ body::before {
 
 .lightbox__info {
   margin-top: 14px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: min(90vw, 600px);
+}
+
+.lightbox__info-text {
+  text-align: left;
 }
 
 .lightbox__info .item-info__title {
@@ -383,6 +399,26 @@ body::before {
 .lightbox__info .item-info__date {
   font-size: 0.7rem;
   margin-top: 2px;
+}
+
+.lightbox__dl {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(155, 48, 255, 0.18);
+  border: 1px solid rgba(155, 48, 255, 0.4);
+  padding: 6px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.lightbox__dl:hover {
+  background: rgba(155, 48, 255, 0.4);
+  border-color: rgba(155, 48, 255, 0.8);
 }
 
 /* Close — minimal, RunwayML-style */
@@ -592,8 +628,9 @@ body::before {
   <a href="#" class="nav__brand">ENTHEOGENOUS<span>Fractal Geek</span></a>
   <div class="nav__filters">
     <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="photos">Photos</button>
+    <button class="filter-btn" data-filter="wallpapers">Wallpapers</button>
     <button class="filter-btn" data-filter="motions">Motions</button>
+    <button class="filter-btn" data-filter="photos">Photos</button>
   </div>
 </nav>
 
@@ -658,121 +695,1857 @@ body::before {
 <main class="gallery">
   <div class="gallery__grid">
     <!-- GALLERY_ITEMS_START -->
-    <!-- PHOTO: Sound X Vision Infinite -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Sound_x_Vision_Infinite_thumb.jpg" data-full="photos/2025_Sound_x_Vision_Infinite.jpg" alt="Sound X Vision Infinite" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #206 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221231_041932_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221231_041932.jpg" alt="Fractal Wallpaper #206" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Sound X Vision Infinite</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #206</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Quantum Drop I -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Quantum_Drop_I_thumb.jpg" data-full="photos/2025_Quantum_Drop_I.jpg" alt="Quantum Drop I" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #205 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221231_041257_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221231_041257.jpg" alt="Fractal Wallpaper #205" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Quantum Drop I</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #205</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Quantum Drop Ii -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Quantum_Drop_II_thumb.jpg" data-full="photos/2025_Quantum_Drop_II.jpg" alt="Quantum Drop Ii" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #204 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221231_040912_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221231_040912.jpg" alt="Fractal Wallpaper #204" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Quantum Drop Ii</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #204</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Quantum Drop Iii -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Quantum_Drop_III_thumb.jpg" data-full="photos/2025_Quantum_Drop_III.jpg" alt="Quantum Drop Iii" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #203 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221231_040811_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221231_040811.jpg" alt="Fractal Wallpaper #203" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Quantum Drop Iii</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #203</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Cosmic Fold Iii -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Cosmic_Fold_III_thumb.jpg" data-full="photos/2025_Cosmic_Fold_III.jpg" alt="Cosmic Fold Iii" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #202 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221231_040703_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221231_040703.jpg" alt="Fractal Wallpaper #202" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Cosmic Fold Iii</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #202</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Luminous Lattice Iv -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Luminous_Lattice_IV_thumb.jpg" data-full="photos/2025_Luminous_Lattice_IV.jpg" alt="Luminous Lattice Iv" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #201 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221229_220022_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221229_220022.jpg" alt="Fractal Wallpaper #201" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Luminous Lattice Iv</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #201</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Sacred Geometry V -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2025_Sacred_Geometry_V_thumb.jpg" data-full="photos/2025_Sacred_Geometry_V.jpg" alt="Sacred Geometry V" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #200 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221229_215844_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221229_215844.jpg" alt="Fractal Wallpaper #200" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Sacred Geometry V</div>
-        <div class="item-info__date">2025</div>
+        <div class="item-info__title">Fractal Wallpaper #200</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Kaleidoscopic Nebula Iii -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2026_Kaleidoscopic_Nebula_III_thumb.jpg" data-full="photos/2026_Kaleidoscopic_Nebula_III.jpg" alt="Kaleidoscopic Nebula Iii" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #199 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221229_215740_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221229_215740.jpg" alt="Fractal Wallpaper #199" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Kaleidoscopic Nebula Iii</div>
-        <div class="item-info__date">2026</div>
+        <div class="item-info__title">Fractal Wallpaper #199</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Kaleidoscopic Mandala Iv -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2026_Kaleidoscopic_Mandala_IV_thumb.jpg" data-full="photos/2026_Kaleidoscopic_Mandala_IV.jpg" alt="Kaleidoscopic Mandala Iv" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #198 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221229_154045_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221229_154045.jpg" alt="Fractal Wallpaper #198" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Kaleidoscopic Mandala Iv</div>
-        <div class="item-info__date">2026</div>
+        <div class="item-info__title">Fractal Wallpaper #198</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Hyperdimensional V -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2026_Hyperdimensional_V_thumb.jpg" data-full="photos/2026_Hyperdimensional_V.jpg" alt="Hyperdimensional V" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #197 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221228_164709_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221228_164709.jpg" alt="Fractal Wallpaper #197" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Hyperdimensional V</div>
-        <div class="item-info__date">2026</div>
+        <div class="item-info__title">Fractal Wallpaper #197</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Prismatic Core Vi -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2026_Prismatic_Core_VI_thumb.jpg" data-full="photos/2026_Prismatic_Core_VI.jpg" alt="Prismatic Core Vi" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #196 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221225_203047_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221225_203047.jpg" alt="Fractal Wallpaper #196" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Prismatic Core Vi</div>
-        <div class="item-info__date">2026</div>
+        <div class="item-info__title">Fractal Wallpaper #196</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- PHOTO: Fractal Resonance Vii -->
-    <div class="gallery__item" data-category="photos">
-      <img src="photos/thumbs/2026_Fractal_Resonance_VII_thumb.jpg" data-full="photos/2026_Fractal_Resonance_VII.jpg" alt="Fractal Resonance Vii" loading="lazy">
+    <!-- WALLPAPER: Fractal Wallpaper #195 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221223_155035_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221223_155035.jpg" alt="Fractal Wallpaper #195" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Fractal Resonance Vii</div>
-        <div class="item-info__date">2026</div>
+        <div class="item-info__title">Fractal Wallpaper #195</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
-    <!-- MOTION: Cosmic Expansion Vii -->
-    <div class="gallery__item" data-category="motions">
-      <video src="motions/2024_Cosmic_Expansion_VII.mp4" preload="metadata" muted playsinline loop></video>
-      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+    <!-- WALLPAPER: Fractal Wallpaper #194 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221223_154902_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221223_154902.jpg" alt="Fractal Wallpaper #194" loading="lazy">
       <div class="item-info">
-        <div class="item-info__title">Cosmic Expansion Vii</div>
-        <div class="item-info__date">2024</div>
+        <div class="item-info__title">Fractal Wallpaper #194</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #193 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221223_154715_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221223_154715.jpg" alt="Fractal Wallpaper #193" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #193</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #192 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221223_154620_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221223_154620.jpg" alt="Fractal Wallpaper #192" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #192</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #191 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221222_183606_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221222_183606.jpg" alt="Fractal Wallpaper #191" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #191</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #190 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221222_172540_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221222_172540.jpg" alt="Fractal Wallpaper #190" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #190</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #189 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221221_204117_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221221_204117.jpg" alt="Fractal Wallpaper #189" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #189</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #188 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221221_203159_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221221_203159.jpg" alt="Fractal Wallpaper #188" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #188</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #187 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221220_143425_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221220_143425.jpg" alt="Fractal Wallpaper #187" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #187</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #186 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221220_143242_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221220_143242.jpg" alt="Fractal Wallpaper #186" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #186</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #185 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221219_164651_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221219_164651.jpg" alt="Fractal Wallpaper #185" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #185</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #184 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221219_164155_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221219_164155.jpg" alt="Fractal Wallpaper #184" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #184</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #183 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221219_164101_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221219_164101.jpg" alt="Fractal Wallpaper #183" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #183</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #182 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221218_151904_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221218_151904.jpg" alt="Fractal Wallpaper #182" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #182</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #181 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221217_174142_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221217_174142.jpg" alt="Fractal Wallpaper #181" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #181</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #180 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221216_195140_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221216_195140.jpg" alt="Fractal Wallpaper #180" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #180</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #179 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221216_193547_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221216_193547.jpg" alt="Fractal Wallpaper #179" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #179</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #178 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221215_174306_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221215_174306.jpg" alt="Fractal Wallpaper #178" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #178</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #177 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221215_172845_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221215_172845.jpg" alt="Fractal Wallpaper #177" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #177</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #176 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221215_172340_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221215_172340.jpg" alt="Fractal Wallpaper #176" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #176</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #175 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221214_133011_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221214_133011.jpg" alt="Fractal Wallpaper #175" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #175</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #174 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221214_131523_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221214_131523.jpg" alt="Fractal Wallpaper #174" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #174</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #173 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_195047_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_195047.jpg" alt="Fractal Wallpaper #173" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #173</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #172 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_194625_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_194625.jpg" alt="Fractal Wallpaper #172" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #172</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #171 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_194535_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_194535.jpg" alt="Fractal Wallpaper #171" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #171</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #170 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_194200_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_194200.jpg" alt="Fractal Wallpaper #170" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #170</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #169 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_193138_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_193138.jpg" alt="Fractal Wallpaper #169" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #169</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #168 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_191637_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_191637.jpg" alt="Fractal Wallpaper #168" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #168</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #167 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_191009_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_191009.jpg" alt="Fractal Wallpaper #167" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #167</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #166 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221213_190318_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221213_190318.jpg" alt="Fractal Wallpaper #166" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #166</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #165 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221212_203248_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221212_203248.jpg" alt="Fractal Wallpaper #165" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #165</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #164 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221212_202904_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221212_202904.jpg" alt="Fractal Wallpaper #164" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #164</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #163 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221212_202533_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221212_202533.jpg" alt="Fractal Wallpaper #163" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #163</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #162 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221212_202421_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221212_202421.jpg" alt="Fractal Wallpaper #162" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #162</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #161 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221212_202343_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221212_202343.jpg" alt="Fractal Wallpaper #161" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #161</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #160 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221211_012722_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221211_012722.jpg" alt="Fractal Wallpaper #160" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #160</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #159 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221211_011941_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221211_011941.jpg" alt="Fractal Wallpaper #159" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #159</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #158 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221211_011851_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221211_011851.jpg" alt="Fractal Wallpaper #158" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #158</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #157 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221209_153925_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221209_153925.jpg" alt="Fractal Wallpaper #157" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #157</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #156 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221209_145715_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221209_145715.jpg" alt="Fractal Wallpaper #156" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #156</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #155 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_135853_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_135853.jpg" alt="Fractal Wallpaper #155" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #155</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #154 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_135735_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_135735.jpg" alt="Fractal Wallpaper #154" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #154</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #153 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_135448_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_135448.jpg" alt="Fractal Wallpaper #153" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #153</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #152 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_135339_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_135339.jpg" alt="Fractal Wallpaper #152" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #152</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #151 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_134913_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_134913.jpg" alt="Fractal Wallpaper #151" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #151</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #150 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_134746_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_134746.jpg" alt="Fractal Wallpaper #150" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #150</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #149 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_134232_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_134232.jpg" alt="Fractal Wallpaper #149" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #149</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #148 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_133957_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_133957.jpg" alt="Fractal Wallpaper #148" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #148</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #147 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221207_133808_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221207_133808.jpg" alt="Fractal Wallpaper #147" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #147</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #146 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_205507_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_205507.jpg" alt="Fractal Wallpaper #146" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #146</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #145 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_205300_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_205300.jpg" alt="Fractal Wallpaper #145" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #145</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #144 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_204743_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_204743.jpg" alt="Fractal Wallpaper #144" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #144</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #143 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_204525_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_204525.jpg" alt="Fractal Wallpaper #143" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #143</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #142 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_203810_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_203810.jpg" alt="Fractal Wallpaper #142" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #142</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #141 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221206_203725_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221206_203725.jpg" alt="Fractal Wallpaper #141" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #141</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #140 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221204_155135_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221204_155135.jpg" alt="Fractal Wallpaper #140" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #140</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #139 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221204_154854_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221204_154854.jpg" alt="Fractal Wallpaper #139" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #139</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #138 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221204_154743_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221204_154743.jpg" alt="Fractal Wallpaper #138" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #138</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #137 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221204_154628_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221204_154628.jpg" alt="Fractal Wallpaper #137" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #137</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #136 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_201946_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_201946.jpg" alt="Fractal Wallpaper #136" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #136</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #135 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_201442_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_201442.jpg" alt="Fractal Wallpaper #135" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #135</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #134 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_201304_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_201304.jpg" alt="Fractal Wallpaper #134" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #134</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #133 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_200831_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_200831.jpg" alt="Fractal Wallpaper #133" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #133</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #132 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_200705_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_200705.jpg" alt="Fractal Wallpaper #132" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #132</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #131 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_200530_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_200530.jpg" alt="Fractal Wallpaper #131" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #131</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #130 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221203_200356_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221203_200356.jpg" alt="Fractal Wallpaper #130" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #130</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #129 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221202_121607_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221202_121607.jpg" alt="Fractal Wallpaper #129" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #129</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #128 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221129_191546_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221129_191546.jpg" alt="Fractal Wallpaper #128" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #128</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #127 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221129_191346_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221129_191346.jpg" alt="Fractal Wallpaper #127" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #127</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #126 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221129_191113_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221129_191113.jpg" alt="Fractal Wallpaper #126" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #126</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #125 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221129_191007_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221129_191007.jpg" alt="Fractal Wallpaper #125" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #125</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #124 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221127_053945_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221127_053945.jpg" alt="Fractal Wallpaper #124" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #124</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #123 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221121_153007_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221121_153007.jpg" alt="Fractal Wallpaper #123" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #123</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #122 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221121_152625_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221121_152625.jpg" alt="Fractal Wallpaper #122" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #122</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #121 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221119_183022_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221119_183022.jpg" alt="Fractal Wallpaper #121" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #121</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #120 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221118_220831_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221118_220831.jpg" alt="Fractal Wallpaper #120" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #120</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #119 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221118_220143_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221118_220143.jpg" alt="Fractal Wallpaper #119" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #119</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #118 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221118_135148_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221118_135148.jpg" alt="Fractal Wallpaper #118" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #118</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #117 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221118_134906_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221118_134906.jpg" alt="Fractal Wallpaper #117" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #117</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #116 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221113_032435_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221113_032435.jpg" alt="Fractal Wallpaper #116" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #116</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #115 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221113_031657_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221113_031657.jpg" alt="Fractal Wallpaper #115" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #115</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #114 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221112_144919_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221112_144919.jpg" alt="Fractal Wallpaper #114" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #114</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #113 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221109_020344_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221109_020344.jpg" alt="Fractal Wallpaper #113" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #113</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #112 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221107_004227_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221107_004227.jpg" alt="Fractal Wallpaper #112" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #112</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #111 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221107_003825_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221107_003825.jpg" alt="Fractal Wallpaper #111" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #111</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #110 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221107_003723_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221107_003723.jpg" alt="Fractal Wallpaper #110" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #110</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #109 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221104_160026_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221104_160026.jpg" alt="Fractal Wallpaper #109" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #109</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #108 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221104_155446_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221104_155446.jpg" alt="Fractal Wallpaper #108" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #108</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #107 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221104_154909_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221104_154909.jpg" alt="Fractal Wallpaper #107" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #107</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #106 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221102_132025_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221102_132025.jpg" alt="Fractal Wallpaper #106" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #106</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #105 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221102_131932_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221102_131932.jpg" alt="Fractal Wallpaper #105" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #105</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #104 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221102_131903_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221102_131903.jpg" alt="Fractal Wallpaper #104" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #104</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #103 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221102_131757_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221102_131757.jpg" alt="Fractal Wallpaper #103" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #103</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #102 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_214035_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_214035.jpg" alt="Fractal Wallpaper #102" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #102</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #101 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_212810_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_212810.jpg" alt="Fractal Wallpaper #101" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #101</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #100 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_212724_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_212724.jpg" alt="Fractal Wallpaper #100" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #100</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #099 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_212514_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_212514.jpg" alt="Fractal Wallpaper #099" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #099</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #098 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_212401_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_212401.jpg" alt="Fractal Wallpaper #098" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #098</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #097 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_212104_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_212104.jpg" alt="Fractal Wallpaper #097" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #097</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #096 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221031_211858_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221031_211858.jpg" alt="Fractal Wallpaper #096" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #096</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #095 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221030_115139_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221030_115139.jpg" alt="Fractal Wallpaper #095" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #095</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #094 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221030_114543_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221030_114543.jpg" alt="Fractal Wallpaper #094" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #094</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #093 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221030_114437_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221030_114437.jpg" alt="Fractal Wallpaper #093" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #093</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #092 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221030_114219_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221030_114219.jpg" alt="Fractal Wallpaper #092" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #092</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #091 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221030_114021_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221030_114021.jpg" alt="Fractal Wallpaper #091" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #091</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #090 -->
+    <div class="gallery__item" data-category="wallpapers" data-ratio="square">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221028_172125_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221028_172125.jpg" alt="Fractal Wallpaper #090" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #090</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #089 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221028_014230_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221028_014230.jpg" alt="Fractal Wallpaper #089" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #089</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #088 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221028_012948_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221028_012948.jpg" alt="Fractal Wallpaper #088" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #088</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #087 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221028_012540_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221028_012540.jpg" alt="Fractal Wallpaper #087" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #087</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #086 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221028_011028_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221028_011028.jpg" alt="Fractal Wallpaper #086" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #086</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #085 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221020_124246_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221020_124246.jpg" alt="Fractal Wallpaper #085" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #085</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #084 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221020_123955_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221020_123955.jpg" alt="Fractal Wallpaper #084" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #084</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #083 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221020_123907_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221020_123907.jpg" alt="Fractal Wallpaper #083" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #083</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #082 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_195903_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_195903.jpg" alt="Fractal Wallpaper #082" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #082</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #081 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_195732_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_195732.jpg" alt="Fractal Wallpaper #081" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #081</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #080 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_195502_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_195502.jpg" alt="Fractal Wallpaper #080" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #080</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #079 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_195327_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_195327.jpg" alt="Fractal Wallpaper #079" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #079</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #078 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_195015_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_195015.jpg" alt="Fractal Wallpaper #078" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #078</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #077 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_194558_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_194558.jpg" alt="Fractal Wallpaper #077" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #077</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #076 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_194534_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_194534.jpg" alt="Fractal Wallpaper #076" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #076</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #075 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_194251_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_194251.jpg" alt="Fractal Wallpaper #075" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #075</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #074 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_194036_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_194036.jpg" alt="Fractal Wallpaper #074" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #074</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #073 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221016_145029_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221016_145029.jpg" alt="Fractal Wallpaper #073" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #073</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #072 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221010_000758_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221010_000758.jpg" alt="Fractal Wallpaper #072" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #072</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #071 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221010_000307_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221010_000307.jpg" alt="Fractal Wallpaper #071" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #071</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #070 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221009_235955_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221009_235955.jpg" alt="Fractal Wallpaper #070" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #070</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #069 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221009_235922_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221009_235922.jpg" alt="Fractal Wallpaper #069" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #069</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #068 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221009_235844_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221009_235844.jpg" alt="Fractal Wallpaper #068" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #068</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #067 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221009_235825_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221009_235825.jpg" alt="Fractal Wallpaper #067" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #067</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #066 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_235624_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_235624.jpg" alt="Fractal Wallpaper #066" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #066</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #065 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_235443_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_235443.jpg" alt="Fractal Wallpaper #065" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #065</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #064 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_235328_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_235328.jpg" alt="Fractal Wallpaper #064" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #064</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #063 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_235039_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_235039.jpg" alt="Fractal Wallpaper #063" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #063</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #062 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_235015_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_235015.jpg" alt="Fractal Wallpaper #062" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #062</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #061 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_212012_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_212012.jpg" alt="Fractal Wallpaper #061" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #061</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #060 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_211838_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_211838.jpg" alt="Fractal Wallpaper #060" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #060</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #059 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221005_211552_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221005_211552.jpg" alt="Fractal Wallpaper #059" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #059</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #058 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_002059_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_002059.jpg" alt="Fractal Wallpaper #058" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #058</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #057 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_002019_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_002019.jpg" alt="Fractal Wallpaper #057" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #057</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #056 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_001633_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_001633.jpg" alt="Fractal Wallpaper #056" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #056</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #055 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_001237_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_001237.jpg" alt="Fractal Wallpaper #055" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #055</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #054 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_000949_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_000949.jpg" alt="Fractal Wallpaper #054" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #054</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #053 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221004_000045_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221004_000045.jpg" alt="Fractal Wallpaper #053" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #053</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #052 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221001_190321_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221001_190321.jpg" alt="Fractal Wallpaper #052" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #052</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #051 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221001_185342_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221001_185342.jpg" alt="Fractal Wallpaper #051" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #051</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #050 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_221001_184804_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_221001_184804.jpg" alt="Fractal Wallpaper #050" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #050</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #049 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220924_184219_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220924_184219.jpg" alt="Fractal Wallpaper #049" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #049</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #048 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220924_183137_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220924_183137.jpg" alt="Fractal Wallpaper #048" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #048</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #047 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220924_183036_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220924_183036.jpg" alt="Fractal Wallpaper #047" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #047</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #046 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_213912_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_213912.jpg" alt="Fractal Wallpaper #046" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #046</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #045 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_213457_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_213457.jpg" alt="Fractal Wallpaper #045" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #045</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #044 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_213318_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_213318.jpg" alt="Fractal Wallpaper #044" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #044</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #043 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_020056_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_020056.jpg" alt="Fractal Wallpaper #043" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #043</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #042 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_015850_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_015850.jpg" alt="Fractal Wallpaper #042" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #042</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #041 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_015500_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_015500.jpg" alt="Fractal Wallpaper #041" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #041</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #040 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_014922_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_014922.jpg" alt="Fractal Wallpaper #040" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #040</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #039 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_013844_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_013844.jpg" alt="Fractal Wallpaper #039" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #039</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #038 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_013500_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_013500.jpg" alt="Fractal Wallpaper #038" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #038</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #037 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_013422_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_013422.jpg" alt="Fractal Wallpaper #037" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #037</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #036 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_013125_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_013125.jpg" alt="Fractal Wallpaper #036" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #036</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #035 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_012920_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_012920.jpg" alt="Fractal Wallpaper #035" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #035</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #034 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_012836_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_012836.jpg" alt="Fractal Wallpaper #034" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #034</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #033 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220922_012818_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220922_012818.jpg" alt="Fractal Wallpaper #033" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #033</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #032 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220919_021156_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220919_021156.jpg" alt="Fractal Wallpaper #032" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #032</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #031 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220917_215009_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220917_215009.jpg" alt="Fractal Wallpaper #031" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #031</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #030 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220917_214934_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220917_214934.jpg" alt="Fractal Wallpaper #030" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #030</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #029 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220917_085001_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220917_085001.jpg" alt="Fractal Wallpaper #029" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #029</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #028 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220915_180139_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220915_180139.jpg" alt="Fractal Wallpaper #028" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #028</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #027 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_110428_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_110428.jpg" alt="Fractal Wallpaper #027" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #027</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #026 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_110054_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_110054.jpg" alt="Fractal Wallpaper #026" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #026</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #025 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_105834_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_105834.jpg" alt="Fractal Wallpaper #025" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #025</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #024 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_105442_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_105442.jpg" alt="Fractal Wallpaper #024" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #024</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #023 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_105102_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_105102.jpg" alt="Fractal Wallpaper #023" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #023</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #022 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_104915_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_104915.jpg" alt="Fractal Wallpaper #022" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #022</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #021 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_104856_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_104856.jpg" alt="Fractal Wallpaper #021" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #021</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #020 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220911_104730_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220911_104730.jpg" alt="Fractal Wallpaper #020" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #020</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #019 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220909_232331_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220909_232331.jpg" alt="Fractal Wallpaper #019" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #019</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #018 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220909_232053_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220909_232053.jpg" alt="Fractal Wallpaper #018" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #018</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #017 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220909_231603_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220909_231603.jpg" alt="Fractal Wallpaper #017" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #017</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #016 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220909_230809_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220909_230809.jpg" alt="Fractal Wallpaper #016" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #016</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #015 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220903_173605_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220903_173605.jpg" alt="Fractal Wallpaper #015" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #015</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #014 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220903_161724_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220903_161724.jpg" alt="Fractal Wallpaper #014" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #014</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #013 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220725_232056_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220725_232056.jpg" alt="Fractal Wallpaper #013" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #013</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #012 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220713_215122_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220713_215122.jpg" alt="Fractal Wallpaper #012" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #012</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #011 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220711_171505_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220711_171505.jpg" alt="Fractal Wallpaper #011" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #011</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #010 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220704_220252_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220704_220252.jpg" alt="Fractal Wallpaper #010" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #010</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #009 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220704_215259_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220704_215259.jpg" alt="Fractal Wallpaper #009" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #009</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #008 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220703_012918_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220703_012918.jpg" alt="Fractal Wallpaper #008" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #008</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #007 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220628_195541_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220628_195541.jpg" alt="Fractal Wallpaper #007" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #007</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #006 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220627_125734_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220627_125734.jpg" alt="Fractal Wallpaper #006" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #006</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #005 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220626_135027_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220626_135027.jpg" alt="Fractal Wallpaper #005" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #005</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #004 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220625_173152_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220625_173152.jpg" alt="Fractal Wallpaper #004" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #004</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #003 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220624_232505_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220624_232505.jpg" alt="Fractal Wallpaper #003" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #003</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #002 -->
+    <div class="gallery__item" data-category="wallpapers">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220623_203337_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220623_203337.jpg" alt="Fractal Wallpaper #002" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #002</div>
+        <div class="item-info__date">2022</div>
+      </div>
+    </div>
+
+    <!-- WALLPAPER: Fractal Wallpaper #001 -->
+    <div class="gallery__item" data-category="wallpapers" data-ratio="square">
+      <img src="photos/Mobile/thumbs/MandelBrowser_220623_011758_thumb.jpg" data-full="photos/Mobile/full/MandelBrowser_220623_011758.jpg" alt="Fractal Wallpaper #001" loading="lazy">
+      <div class="item-info">
+        <div class="item-info__title">Fractal Wallpaper #001</div>
+        <div class="item-info__date">2022</div>
       </div>
     </div>
 
@@ -786,12 +2559,12 @@ body::before {
       </div>
     </div>
 
-    <!-- MOTION: Quantum Vortex V -->
+    <!-- MOTION: Cosmic Expansion Vii -->
     <div class="gallery__item" data-category="motions">
-      <video src="motions/2024_Quantum_Vortex_V.mp4" preload="metadata" muted playsinline loop></video>
+      <video src="motions/2024_Cosmic_Expansion_VII.mp4" preload="metadata" muted playsinline loop></video>
       <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
       <div class="item-info">
-        <div class="item-info__title">Quantum Vortex V</div>
+        <div class="item-info__title">Cosmic Expansion Vii</div>
         <div class="item-info__date">2024</div>
       </div>
     </div>
@@ -806,12 +2579,22 @@ body::before {
       </div>
     </div>
 
-    <!-- MOTION: Neural Resonance Iii -->
+    <!-- MOTION: Quantum Vortex V -->
     <div class="gallery__item" data-category="motions">
-      <video src="motions/2025_Neural_Resonance_III.mp4" preload="metadata" muted playsinline loop></video>
+      <video src="motions/2024_Quantum_Vortex_V.mp4" preload="metadata" muted playsinline loop></video>
       <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
       <div class="item-info">
-        <div class="item-info__title">Neural Resonance Iii</div>
+        <div class="item-info__title">Quantum Vortex V</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- MOTION: Hyperspace Transmission I -->
+    <div class="gallery__item" data-category="motions">
+      <video src="motions/2025_Hyperspace_Transmission_I.mp4" preload="metadata" muted playsinline loop></video>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Hyperspace Transmission I</div>
         <div class="item-info__date">2025</div>
       </div>
     </div>
@@ -826,12 +2609,22 @@ body::before {
       </div>
     </div>
 
-    <!-- MOTION: Hyperspace Transmission I -->
+    <!-- MOTION: Mandel Cosmos Loop -->
     <div class="gallery__item" data-category="motions">
-      <video src="motions/2025_Hyperspace_Transmission_I.mp4" preload="metadata" muted playsinline loop></video>
+      <video src="motions/2025_Mandel_Cosmos_Loop.mp4" preload="metadata" muted playsinline loop></video>
       <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
       <div class="item-info">
-        <div class="item-info__title">Hyperspace Transmission I</div>
+        <div class="item-info__title">Mandel Cosmos Loop</div>
+        <div class="item-info__date">2025</div>
+      </div>
+    </div>
+
+    <!-- MOTION: Neural Resonance Iii -->
+    <div class="gallery__item" data-category="motions">
+      <video src="motions/2025_Neural_Resonance_III.mp4" preload="metadata" muted playsinline loop></video>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Neural Resonance Iii</div>
         <div class="item-info__date">2025</div>
       </div>
     </div>
@@ -942,12 +2735,15 @@ body::before {
     var placeholder = item.querySelector('.placeholder');
 
     var mediaHTML = '';
+    var downloadHTML = '';
 
     if (isMotion && vid) {
       mediaHTML = '<video src="' + vid.src + '" controls autoplay style="max-width:90vw;max-height:80vh;border-radius:4px"></video>';
+      downloadHTML = '<a href="' + vid.src + '" download class="lightbox__dl" target="_blank" rel="noopener">Save Video</a>';
     } else if (img) {
       var fullSrc = img.dataset.full || img.src;
-      mediaHTML = '<img src="' + fullSrc + '" alt="' + title + '" style="max-width:90vw;max-height:80vh;border-radius:4px">';
+      mediaHTML = '<img src="' + fullSrc + '" alt="' + title + '" style="max-width:90vw;max-height:82vh;border-radius:4px;object-fit:contain">';
+      downloadHTML = '<a href="' + fullSrc + '" download class="lightbox__dl" target="_blank" rel="noopener">Save Wallpaper</a>';
     } else if (placeholder) {
       var bg = placeholder.style.background || placeholder.style.backgroundImage;
       mediaHTML = '<div style="width:min(70vw,800px);aspect-ratio:1/1;max-height:70vh;border-radius:4px;background:' + bg + '"></div>';
@@ -956,8 +2752,11 @@ body::before {
     lightboxContent.innerHTML =
       mediaHTML +
       '<div class="lightbox__info">' +
-        '<div class="item-info__title">' + title + '</div>' +
-        '<div class="item-info__date">' + date + '</div>' +
+        '<div class="lightbox__info-text">' +
+          '<div class="item-info__title">' + title + '</div>' +
+          '<div class="item-info__date">' + date + '</div>' +
+        '</div>' +
+        downloadHTML +
       '</div>';
 
     lightboxCounter.textContent = (currentIndex + 1) + ' / ' + visibleItems.length;
