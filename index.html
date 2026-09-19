@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entheogenous — Fractal Art</title>
+<meta name="description" content="Abstract geometrical shapes, Fractals and more. Portfolio of Entheogenous (Fractal Geek).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE — RunwayML design language
+   Pure black, cinematic, editorial, zero shadows
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #000000;
+  --surface: #1a1a1a;
+  --border: #27272a;
+  --text: #ffffff;
+  --text-secondary: #b0a8b8;
+  --text-muted: #a7a7a7;
+  --accent-purple: #9b30ff;
+  --accent-magenta: #e040a0;
+  --accent-cyan: #00d4ff;
+  --accent-gold: #ffc845;
+  --accent-blue: #4060ff;
+  --glow-purple: rgba(155, 48, 255, 0.18);
+  --glow-magenta: rgba(224, 64, 160, 0.14);
+  --glow-cyan: rgba(0, 212, 255, 0.12);
+  --nav-h: 52px;
+  --font-brand: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --container: 1600px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   ANIMATED EDGE GLOW — extremely subtle purple/magenta/cyan
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+  animation: edgeShift 16s ease-in-out infinite alternate;
+}
+
+@keyframes edgeShift {
+  0% {
+    box-shadow:
+      inset 0  1px 80px -30px var(--glow-purple),
+      inset 0 -1px 60px -30px var(--glow-magenta),
+      inset  1px 0 50px -25px var(--glow-cyan),
+      inset -1px 0 50px -25px var(--glow-cyan);
+  }
+  33% {
+    box-shadow:
+      inset 0  1px 60px -30px var(--glow-cyan),
+      inset 0 -1px 80px -30px var(--glow-purple),
+      inset  1px 0 60px -25px var(--glow-magenta),
+      inset -1px 0 40px -25px var(--glow-purple);
+  }
+  66% {
+    box-shadow:
+      inset 0  1px 70px -30px var(--glow-magenta),
+      inset 0 -1px 50px -30px var(--glow-cyan),
+      inset  1px 0 40px -25px var(--glow-purple),
+      inset -1px 0 70px -25px var(--glow-magenta);
+  }
+  100% {
+    box-shadow:
+      inset 0  1px 80px -30px var(--glow-purple),
+      inset 0 -1px 60px -30px var(--glow-magenta),
+      inset  1px 0 50px -25px var(--glow-cyan),
+      inset -1px 0 50px -25px var(--glow-cyan);
+  }
+}
+
+/* ============================================================
+   NAVIGATION — nearly invisible, sticky
+   RunwayML: minimal chrome, content-first
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 48px);
+  max-width: var(--container);
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nav__brand {
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.nav__brand span {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.72rem;
+  margin-left: 10px;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+}
+
+.nav__filters {
+  display: flex;
+  gap: 6px;
+}
+
+/* Filter pills — RunwayML small radius, NOT pill-shaped */
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  line-height: 1.3;
+}
+
+.filter-btn:hover {
+  border-color: rgba(155, 48, 255, 0.3);
+  color: var(--text);
+}
+
+/* Active filter — subtle purple glow */
+.filter-btn.active {
+  background: rgba(155, 48, 255, 0.15);
+  border-color: rgba(155, 48, 255, 0.4);
+  color: #fff;
+}
+
+/* ============================================================
+   GALLERY — editorial magazine-style asymmetric grid
+   Cinema-wide container, generous spacing, art breathes
+   ============================================================ */
+.gallery {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 40px) clamp(20px, 4vw, 48px);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+}
+
+/* Magazine-style varied spans for visual asymmetry */
+.gallery__item:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
+.gallery__item:nth-child(6n+4) { grid-column: span 2; }
+
+/* Items — zero shadow, border containment only */
+.gallery__item {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  border: 1px solid transparent;
+}
+
+.gallery__item[data-category="motions"] {
+  aspect-ratio: 16 / 9;
+}
+
+/* Large spanned items keep square */
+.gallery__item:nth-child(6n+1) {
+  aspect-ratio: 1 / 1;
+}
+
+/* Wide span items */
+.gallery__item:nth-child(6n+4) {
+  aspect-ratio: 2 / 1;
+}
+
+/* Hover — subtle scale + faint glow from art color */
+.gallery__item:hover {
+  transform: scale(1.02);
+  border-color: rgba(155, 48, 255, 0.15);
+  z-index: 2;
+}
+
+/* Placeholder gradient backgrounds — fractal art stand-ins */
+.gallery__item .placeholder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* Real images/videos — full bleed, RunwayML style */
+.gallery__item img,
+.gallery__item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Info overlay — invisible until hover, editorial type */
+.gallery__item .item-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px 16px 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery__item:hover .item-info {
+  opacity: 1;
+}
+
+.item-info__title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.item-info__date {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   MOTION PLAY ICON OVERLAY
+   ============================================================ */
+.gallery__item[data-category="motions"] .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.gallery__item[data-category="motions"]:hover .play-icon {
+  opacity: 0.8;
+}
+
+.play-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: rgba(255, 255, 255, 0.8);
+  margin-left: 2px;
+}
+
+/* Fade animation for filtering */
+.gallery__item {
+  animation: fadeIn 0.35s ease both;
+}
+
+.gallery__item.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   LIGHTBOX — cinematic overlay
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox__content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lightbox.open .lightbox__content {
+  transform: scale(1);
+}
+
+.lightbox__content img,
+.lightbox__content video {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lightbox__info {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.lightbox__info .item-info__title {
+  font-size: 0.95rem;
+  letter-spacing: -0.5px;
+}
+
+.lightbox__info .item-info__date {
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+
+/* Close — minimal, RunwayML-style */
+.lightbox__close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+  z-index: 1002;
+}
+
+.lightbox__close:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.lightbox__close::before,
+.lightbox__close::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 1px;
+  background: var(--text-muted);
+}
+
+.lightbox__close::before { transform: rotate(45deg); }
+.lightbox__close::after  { transform: rotate(-45deg); }
+
+/* Nav arrows — barely there */
+.lightbox__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+  z-index: 1002;
+}
+
+.lightbox__nav:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.lightbox__nav--prev { left: 20px; }
+.lightbox__nav--next { right: 20px; }
+
+.lightbox__nav svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Counter */
+.lightbox__counter {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  z-index: 1002;
+}
+
+/* ============================================================
+   FOOTER — minimal, RunwayML editorial
+   ============================================================ */
+.footer {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 24px clamp(20px, 4vw, 48px) 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.2px;
+}
+
+.footer a {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: var(--text);
+}
+
+.footer__ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer__ig svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .gallery__item:nth-child(6n+1) { grid-column: span 2; grid-row: span 1; }
+  .gallery__item:nth-child(6n+4) { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery__item:nth-child(6n+1) { grid-column: span 2; grid-row: span 1; }
+  .gallery__item:nth-child(6n+4) { grid-column: span 1; }
+}
+
+/* Mobile — single column */
+@media (max-width: 540px) {
+  .nav {
+    height: 48px;
+    padding: 0 16px;
+  }
+
+  .nav__brand {
+    font-size: 0.85rem;
+  }
+
+  .nav__brand span { display: none; }
+
+  .filter-btn {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+  }
+
+  .gallery {
+    padding: 12px 12px;
+  }
+
+  .gallery__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Reset spans on mobile */
+  .gallery__item:nth-child(6n+1),
+  .gallery__item:nth-child(6n+4) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery__item[data-category="photos"],
+  .gallery__item:nth-child(6n+1) {
+    aspect-ratio: 1 / 1;
+  }
+
+  .gallery__item:nth-child(6n+4) {
+    aspect-ratio: 1 / 1;
+  }
+
+  .lightbox__nav--prev { left: 8px; }
+  .lightbox__nav--next { right: 8px; }
+
+  .footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding: 20px 16px 28px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     Nearly invisible — artist name + filter pills
+     ============================================================ -->
+<nav class="nav">
+  <a href="#" class="nav__brand">ENTHEOGENOUS<span>Fractal Geek</span></a>
+  <div class="nav__filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="photos">Photos</button>
+    <button class="filter-btn" data-filter="motions">Motions</button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     GALLERY
+
+     HOW TO ADD YOUR CONTENT
+     ========================
+     Each gallery item is a <div class="gallery__item"> with:
+       - data-category="photos" or data-category="motions"
+       - A child element: either <img> or <video>
+       - An .item-info overlay with title and date
+       - For motions: a .play-icon overlay (see existing items)
+
+     TO ADD A PHOTO:
+     Replace the .placeholder div with an <img> tag:
+
+       <div class="gallery__item" data-category="photos">
+         <img src="path/to/your-image.jpg"
+              alt="Fractal Title"
+              loading="lazy">
+         <div class="item-info">
+           <div class="item-info__title">Your Title</div>
+           <div class="item-info__date">2024</div>
+         </div>
+       </div>
+
+     For the lightbox, the full-res image URL is taken from
+     the img src. If you want a separate high-res version,
+     add data-full="path/to/highres.jpg" to the img tag.
+
+     TO ADD A VIDEO/MOTION:
+     Replace the .placeholder div with a <video> tag:
+
+       <div class="gallery__item" data-category="motions">
+         <video src="path/to/your-video.mp4"
+                preload="metadata"
+                muted
+                loop
+                playsinline></video>
+         <div class="play-icon">
+           <svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg>
+         </div>
+         <div class="item-info">
+           <div class="item-info__title">Your Title</div>
+           <div class="item-info__date">2024</div>
+         </div>
+       </div>
+
+     POSTER IMAGE FOR VIDEOS:
+     Add a poster attribute: <video poster="thumb.jpg" ...>
+
+     LAZY LOADING:
+     For images, add loading="lazy" to the <img> tag.
+     For deferred src loading, use data-src="path.jpg" instead
+     of src — the IntersectionObserver below handles it.
+
+     TO REMOVE PLACEHOLDERS:
+     Delete the <div class="gallery__item"> blocks with
+     .placeholder divs and replace with real content above.
+     ============================================================ -->
+<main class="gallery">
+  <div class="gallery__grid">
+
+    <!-- PHOTO 1 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 30% 40%, #9b30ff 0%, #2a0845 40%, #000 80%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Mandala I</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 2 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 60% 50%, #e040a0 0%, #3d0030 35%, #000 75%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Kaleidoscope II</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 3 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 50% 60%, #00d4ff 0%, #002233 40%, #000 80%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Cyan Bloom</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- MOTION 1 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(135deg, #4060ff 0%, #9b30ff 40%, #e040a0 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Spiral Flow</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 4 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(circle at 40% 45%, #ffc845 0%, #4a2800 35%, #000 70%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Golden Ratio</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 5 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 55% 35%, #9b30ff 0%, #e040a0 30%, #1a0025 60%, #000 85%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Fractal Nebula</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- MOTION 2 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(160deg, #00d4ff 0%, #9b30ff 50%, #000 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Pulsation</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 6 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: conic-gradient(from 45deg, #9b30ff, #e040a0, #ffc845, #00d4ff, #9b30ff)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Spectrum Mandala</div>
+        <div class="item-info__date">2024</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 7 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 70% 30%, #4060ff 0%, #000 60%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Deep Blue</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- MOTION 3 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(200deg, #e040a0 0%, #ffc845 40%, #000 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Magenta Drift</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 8 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(circle at 50% 50%, #00d4ff 0%, #9b30ff 35%, #000 70%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Symmetry Gate</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 9 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 35% 65%, #e040a0 0%, #4060ff 40%, #000 80%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Vortex III</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 10 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(circle at 60% 40%, #ffc845 0%, #e040a0 30%, #1a0020 60%, #000 85%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Solar Fractal</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- MOTION 4 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(90deg, #000 0%, #9b30ff 50%, #000 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Sounds x Visions I</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 11 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: conic-gradient(from 180deg, #00d4ff, #000, #e040a0, #000, #00d4ff)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Dual Symmetry</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- MOTION 5 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(45deg, #ffc845 0%, #e040a0 35%, #9b30ff 70%, #4060ff 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Chromatic Wave</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- PHOTO 12 -->
+    <div class="gallery__item" data-category="photos">
+      <div class="placeholder" style="background: radial-gradient(ellipse at 45% 55%, #9b30ff 0%, #00d4ff 25%, #000 65%)"></div>
+      <div class="item-info">
+        <div class="item-info__title">Infinite Loop</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+    <!-- MOTION 6 -->
+    <div class="gallery__item" data-category="motions">
+      <div class="placeholder" style="background: linear-gradient(270deg, #00d4ff 0%, #9b30ff 30%, #e040a0 60%, #ffc845 100%)"></div>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+      <div class="item-info">
+        <div class="item-info__title">Drop I</div>
+        <div class="item-info__date">2023</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============================================================
+     FOOTER — minimal, Instagram link + copyright
+     ============================================================ -->
+<footer class="footer">
+  <span>&copy; Entheogenous. All rights reserved.</span>
+  <a href="https://instagram.com/entheogenous" target="_blank" rel="noopener" class="footer__ig">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <circle cx="12" cy="12" r="5"/>
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+    </svg>
+    @entheogenous
+  </a>
+</footer>
+
+<!-- ============================================================
+     LIGHTBOX OVERLAY
+     ============================================================ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" aria-label="Close"></button>
+  <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--next" aria-label="Next">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <div class="lightbox__content" id="lightboxContent"></div>
+  <div class="lightbox__counter" id="lightboxCounter"></div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  // ---- Filter buttons ----
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.gallery__item');
+
+  function filterGallery(category) {
+    items.forEach(function (item, i) {
+      var match = category === 'all' || item.dataset.category === category;
+      if (match) {
+        item.classList.remove('hidden');
+        item.style.animationDelay = (i * 0.03) + 's';
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      filterGallery(btn.dataset.filter);
+    });
+  });
+
+  // ---- Lightbox ----
+  var lightbox = document.getElementById('lightbox');
+  var lightboxContent = document.getElementById('lightboxContent');
+  var lightboxCounter = document.getElementById('lightboxCounter');
+  var currentIndex = 0;
+  var visibleItems = [];
+
+  function getVisibleItems() {
+    return Array.from(items).filter(function (el) {
+      return !el.classList.contains('hidden');
+    });
+  }
+
+  function openLightbox(index) {
+    visibleItems = getVisibleItems();
+    currentIndex = index;
+    renderLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    var vid = lightboxContent.querySelector('video');
+    if (vid) vid.pause();
+  }
+
+  function renderLightbox() {
+    var item = visibleItems[currentIndex];
+    if (!item) return;
+
+    var titleEl = item.querySelector('.item-info__title');
+    var dateEl = item.querySelector('.item-info__date');
+    var title = titleEl ? titleEl.textContent : '';
+    var date = dateEl ? dateEl.textContent : '';
+    var isMotion = item.dataset.category === 'motions';
+    var img = item.querySelector('img');
+    var vid = item.querySelector('video');
+    var placeholder = item.querySelector('.placeholder');
+
+    var mediaHTML = '';
+
+    if (isMotion && vid) {
+      mediaHTML = '<video src="' + vid.src + '" controls autoplay style="max-width:90vw;max-height:80vh;border-radius:4px"></video>';
+    } else if (img) {
+      var fullSrc = img.dataset.full || img.src;
+      mediaHTML = '<img src="' + fullSrc + '" alt="' + title + '" style="max-width:90vw;max-height:80vh;border-radius:4px">';
+    } else if (placeholder) {
+      var bg = placeholder.style.background || placeholder.style.backgroundImage;
+      mediaHTML = '<div style="width:min(70vw,800px);aspect-ratio:1/1;max-height:70vh;border-radius:4px;background:' + bg + '"></div>';
+    }
+
+    lightboxContent.innerHTML =
+      mediaHTML +
+      '<div class="lightbox__info">' +
+        '<div class="item-info__title">' + title + '</div>' +
+        '<div class="item-info__date">' + date + '</div>' +
+      '</div>';
+
+    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + visibleItems.length;
+  }
+
+  function nextSlide() {
+    var vid = lightboxContent.querySelector('video');
+    if (vid) vid.pause();
+    currentIndex = (currentIndex + 1) % visibleItems.length;
+    renderLightbox();
+  }
+
+  function prevSlide() {
+    var vid = lightboxContent.querySelector('video');
+    if (vid) vid.pause();
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    renderLightbox();
+  }
+
+  // Click handlers — open lightbox on item click
+  items.forEach(function (item) {
+    item.addEventListener('click', function () {
+      var vis = getVisibleItems();
+      var idx = vis.indexOf(item);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  document.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+  document.querySelector('.lightbox__nav--prev').addEventListener('click', prevSlide);
+  document.querySelector('.lightbox__nav--next').addEventListener('click', nextSlide);
+
+  // Click outside content to close
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Keyboard navigation: arrows + ESC
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+
+  // ---- Lazy load observer (for when real images are added) ----
+  if ('IntersectionObserver' in window) {
+    var lazyObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          lazyObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('img[data-src]').forEach(function (img) {
+      lazyObserver.observe(img);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
