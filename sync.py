@@ -25,17 +25,23 @@ VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov"}
 def parse_filename(filename: str, file_path: Path):
     """Extract clean title and year from filename or file metadata."""
     stem = file_path.stem
-    # Remove leading numbering like "01_", "02 - "
-    clean = re.sub(r"^[\d\s_\-]+", "", stem)
+    year = None
     
-    # Try to extract 4-digit year at end (e.g. "_2024" or "-2024")
-    year_match = re.search(r"[_\-\s](\d{4})$", clean)
-    if year_match:
-        year = year_match.group(1)
-        clean = clean[:year_match.start()]
+    # Check if starts with a 4-digit year like "2026_" or "2025-"
+    start_year_match = re.match(r"^(\d{4})[_\-\s]+(.*)", stem)
+    if start_year_match:
+        year = start_year_match.group(1)
+        clean = start_year_match.group(2)
     else:
-        mtime = file_path.stat().st_mtime
-        year = str(datetime.fromtimestamp(mtime).year)
+        # Check if ends with a 4-digit year like "_2026"
+        end_year_match = re.search(r"[_\-\s](\d{4})$", stem)
+        if end_year_match:
+            year = end_year_match.group(1)
+            clean = stem[:end_year_match.start()]
+        else:
+            clean = re.sub(r"^[\d\s_\-]+", "", stem)
+            mtime = file_path.stat().st_mtime
+            year = str(datetime.fromtimestamp(mtime).year)
     
     # Replace underscores/hyphens with spaces
     title = re.sub(r"[_\-]+", " ", clean).strip().title()
@@ -146,16 +152,19 @@ def build_gallery():
     start_tag = "<!-- GALLERY_ITEMS_START -->"
     end_tag = "<!-- GALLERY_ITEMS_END -->"
     
-    pattern = rf"({re.escape(start_tag)})(.*?)({re.escape(end_tag)})"
-    replacement = f"\\1\n" + "\n\n".join(items_html) + f"\n    \\3"
-    
-    new_html = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
-    if new_html == html_content:
+    if start_tag not in html_content or end_tag not in html_content:
         print("Warning: Could not locate gallery markers in index.html.")
         return False
+
+    pattern = rf"({re.escape(start_tag)})(.*?)({re.escape(end_tag)})"
+    replacement = f"\\1\n" + "\n\n".join(items_html) + f"\n    \\3"
+    new_html = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
     
-    INDEX_FILE.write_text(new_html, encoding="utf-8")
-    print("Updated index.html with new media items.")
+    if new_html != html_content:
+        INDEX_FILE.write_text(new_html, encoding="utf-8")
+        print("Updated index.html with new media items.")
+    else:
+        print("index.html gallery is already up to date.")
     return True
 
 
