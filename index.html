@@ -2742,7 +2742,8 @@ body::before {
       downloadHTML = '<a href="' + vid.src + '" download class="lightbox__dl" target="_blank" rel="noopener">Save Video</a>';
     } else if (img) {
       var fullSrc = img.dataset.full || img.src;
-      mediaHTML = '<img src="' + fullSrc + '" alt="' + title + '" style="max-width:90vw;max-height:82vh;border-radius:4px;object-fit:contain">';
+      var thumbSrc = img.src;
+      mediaHTML = '<img src="' + fullSrc + '" onerror="this.onerror=null;this.src=\'' + thumbSrc + '\';" alt="' + title + '" style="max-width:90vw;max-height:82vh;border-radius:4px;object-fit:contain">';
       downloadHTML = '<a href="' + fullSrc + '" download class="lightbox__dl" target="_blank" rel="noopener">Save Wallpaper</a>';
     } else if (placeholder) {
       var bg = placeholder.style.background || placeholder.style.backgroundImage;
